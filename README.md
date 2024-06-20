@@ -35,9 +35,10 @@ To deploy this project run
 ## modify
 
 to modify or add commands do
-
+```python
  elif "<command>" in user_input:
             return "<response>"
+            ```
 
 ## Installation
 
