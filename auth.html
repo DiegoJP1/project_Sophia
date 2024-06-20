@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Web Playback SDK</title>
+</head>
+<body>
+    <h1>Spotify Web Playback SDK</h1>
+    <div id="player"></div>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script>
+        window.onSpotifyWebPlaybackSDKReady = () => {
+            const token = 'BQCcWJM4pfTtdMZgrkTabJni-z5cDBuHRusT6bXfZy2YqW41vIkUh1gSJDI2795nA6TTlCuxC7xv2JmaGjn7fsA5JoUfnwAA4xJJipba8AdSho9X9UHwnCOIz-qVRlpgB62OP-B715vNP2SR9A6Tqd5xxdQqYWgoOhs6Uxn1kHtlYQk7ZpmzSFuv-D282Xj18Hx5IS5DjjJ6MoUfKfsG", "token_type": "Bearer", "expires_in": 3600, "scope": "user-library-read user-modify-playback-state'; 
+            const player = new Spotify.Player({
+                name: 'Sophia Player',
+                getOAuthToken: cb => { cb(token); }
+            });
+            player.addListener('ready', ({ device_id }) => {
+                console.log('Ready with Device ID', device_id);
+                localStorage.setItem('device_id', device_id);
+            });
+            player.addListener('not_ready', ({ device_id }) => {
+                console.log('Device ID has gone offline', device_id);
+            });
+
+            player.connect();
+        };
+    </script>
+</body>
+</html>
